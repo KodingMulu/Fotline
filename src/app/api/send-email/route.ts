@@ -21,8 +21,6 @@ export async function POST(req: Request) {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      logger: true,
-      debug: true,
     });
 
     try {
@@ -63,7 +61,6 @@ export async function POST(req: Request) {
     console.error("❌ CRITICAL ERROR:", error);
     return NextResponse.json({
       error: 'Gagal mengirim email.',
-      details: error.message // Kirim pesan error ke frontend untuk debugging
     }, { status: 500 });
   }
 }

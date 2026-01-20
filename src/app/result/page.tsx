@@ -44,7 +44,6 @@ export default function ResultPage() {
                 scale: 2,
                 useCORS: true,
                 backgroundColor: null,
-                logging: false,
                 onclone: (clonedDoc) => {
                     const element = clonedDoc.getElementById("print-area");
                     if (element) {
