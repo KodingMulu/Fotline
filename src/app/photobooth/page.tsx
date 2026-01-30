@@ -124,48 +124,56 @@ export default function PhotoBooth() {
                 animate={{ scale: 1, opacity: 1 }}
                 className="relative w-full max-w-2xl perspective-1000 z-10"
             >
-                <div className="relative bg-[#1a1a1a] rounded-t-2xl border-[8px] border-[#2a2a2a] shadow-2xl overflow-hidden ring-1 ring-white/10">
+                <div className={`relative bg-[#1a1a1a] transition-all duration-500 shadow-2xl overflow-hidden ring-1 ring-white/10 ${'w-[280px] h-[580px] mx-auto rounded-[3rem] border-[12px] border-[#2a2a2a] md:w-full md:h-auto md:aspect-[16/10] md:rounded-t-2xl md:border-[8px]'}`}>
                     <div className="relative aspect-[16/10] bg-black w-full overflow-hidden">
-                        <Webcam
-                            ref={webcamRef}
-                            audio={false}
-                            screenshotFormat="image/jpeg"
-                            videoConstraints={{ facingMode: "user" }}
-                            className={`w-full h-full object-cover transform scale-x-[-1] transition-opacity duration-700 ${isModelLoading ? 'opacity-0' : 'opacity-100'}`}
-                        />
+                        <div className="md:hidden absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#2a2a2a] rounded-b-3xl z-50 flex items-center justify-center">
+                            <div className="w-10 h-1 bg-[#0f0f0f] rounded-full"></div>
+                        </div>
 
-                        <AnimatePresence>
-                            {isModelLoading && (
-                                <motion.div
-                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                    className="absolute inset-0 flex flex-col items-center justify-center bg-white/90 backdrop-blur-sm text-zinc-900 z-30"
-                                >
-                                    <Loader2 className="w-12 h-12 animate-spin text-pink-500 mb-4" />
-                                    <p className="text-zinc-500 text-sm tracking-widest uppercase font-medium">Initializing AI...</p>
-                                </motion.div>
-                            )}
+                        <div className="relative h-full md:aspect-[16/10] bg-black w-full overflow-hidden">
+                            <Webcam
+                                ref={webcamRef}
+                                audio={false}
+                                screenshotFormat="image/jpeg"
+                                mirrored={true}
+                                videoConstraints={{ facingMode: "user" }}
+                                style={{ transform: "scaleX(1)" }}
+                                className="w-full h-full object-cover"
+                            />
 
-                            {countdown === 0 && (
-                                <motion.div
-                                    initial={{ opacity: 0.8 }} animate={{ opacity: 0 }}
-                                    className="absolute inset-0 bg-white z-50"
-                                />
-                            )}
-
-                            {countdown !== null && countdown > 0 && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-white/30 backdrop-blur-md z-40">
-                                    <motion.span
-                                        key={countdown}
-                                        initial={{ scale: 0.5, opacity: 0 }}
-                                        animate={{ scale: 1.5, opacity: 1 }}
-                                        exit={{ scale: 0, opacity: 0 }}
-                                        className="text-gray-900 text-[150px] font-black drop-shadow-xl"
+                            <AnimatePresence>
+                                {isModelLoading && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                                        className="absolute inset-0 flex flex-col items-center justify-center bg-white/90 backdrop-blur-sm text-zinc-900 z-30"
                                     >
-                                        {countdown}
-                                    </motion.span>
-                                </div>
-                            )}
-                        </AnimatePresence>
+                                        <Loader2 className="w-12 h-12 animate-spin text-pink-500 mb-4" />
+                                        <p className="text-zinc-500 text-sm tracking-widest uppercase font-medium">Initializing AI...</p>
+                                    </motion.div>
+                                )}
+
+                                {countdown === 0 && (
+                                    <motion.div
+                                        initial={{ opacity: 0.8 }} animate={{ opacity: 0 }}
+                                        className="absolute inset-0 bg-white z-50"
+                                    />
+                                )}
+
+                                {countdown !== null && countdown > 0 && (
+                                    <div className="absolute inset-0 flex items-center justify-center bg-white/30 backdrop-blur-md z-40">
+                                        <motion.span
+                                            key={countdown}
+                                            initial={{ scale: 0.5, opacity: 0 }}
+                                            animate={{ scale: 1.5, opacity: 1 }}
+                                            exit={{ scale: 0, opacity: 0 }}
+                                            className="text-gray-900 text-[150px] font-black drop-shadow-xl"
+                                        >
+                                            {countdown}
+                                        </motion.span>
+                                    </div>
+                                )}
+                            </AnimatePresence>
+                        </div>
 
                         {!isModelLoading && (
                             <>
