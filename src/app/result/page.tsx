@@ -194,7 +194,7 @@ export default function ResultPage() {
                     <div className="mb-5 md:mb-8">
                         <label className="text-xs md:text-sm font-bold text-gray-700 mb-2 md:mb-3 block text-center md:text-left">Choose Layout Style</label>
                         <div className="flex gap-3 md:gap-4 justify-center md:justify-start">
-                            {[1, 2, 3, 4].map((num) => (
+                            {[1, 2, 3, 4, 5].map((num) => (
                                 <button
                                     key={num}
                                     onClick={() => setSelectedFrame(`/assets/frame${num}.png`)}
